@@ -4,6 +4,6 @@
 
 import with 
 
-```from ...amd_tracer import *```
+```from amdtracer.tensorTools import *```
 
 vary number of dots to pick right parent directory
