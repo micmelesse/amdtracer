@@ -6,6 +6,7 @@ import collections
 from natsort import natsorted
 import torch
 
+
 def yes_or_no(question):
     while "the answer is invalid":
         reply = str(input(question + ' (y/n): ')).lower().strip()
@@ -61,6 +62,23 @@ def uniquify(path):
     return path
 
 
+save_count = 0
+
+
+def add_save_count(path):
+    global save_count
+    
+    filename, extension = os.path.splitext(path)
+    dirname = os.path.dirname(filename)
+    basename = os.path.basename(filename)
+
+    new_basename = str(save_count) + "_" + basename + extension
+    path = os.path.join(dirname, new_basename)
+    
+    save_count+=1
+    return path
+
+
 def save_tensor(tensor_to_save, name=None):
     if not use_tracer():
         return
@@ -78,7 +96,8 @@ def save_tensor(tensor_to_save, name=None):
     save_path = os.path.join(
         host_name, str(name) + "_" + str(device_id) + '.pt')
 
-    save_path = uniquify(save_path)
+    # save_path = uniquify(save_path)
+    save_path = add_save_count(save_path)
 
     torch.save(tensor_to_save, save_path)
 
