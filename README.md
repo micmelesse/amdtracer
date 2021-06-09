@@ -1,6 +1,9 @@
 # AMD TRACER
 
 ## Instructions
+install with 
+
+```pip install git+https://github.com/micmelesse/amdtracer```
 
 import with 
 
